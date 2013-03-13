@@ -31,6 +31,12 @@ class YoutubeUrlField(models.URLField):
  
 try:
     from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([],  ["^fields\.YoutubeUrlField"])
+    add_introspection_rules([
+        (
+            [YoutubeUrlField],
+            [],
+            {},
+        ),
+    ], ["^youtubeurl_field\.modelfields\.YoutubeUrlField"])
 except ImportError:
     pass

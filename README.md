@@ -6,7 +6,6 @@ Django youtube url field
 Installation
 ============
 
-::
 
     pip install git+git://github.com/ko1es/django-youtubefield.git
 
@@ -25,7 +24,7 @@ Use it like any regular model field:
 Template usage
 ===========
 
-Use .embed_url in your templates to insert it in <iframe src >
+Use .embed_url in your templates to insert it in
 
 		{% if item.video %}
 		<div class="flex-video widescreen">
