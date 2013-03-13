@@ -1,7 +1,10 @@
-from django.core import validators
 import urllib2
+import urlparse
+from django.core import validators
 
-class YoutubeUrl(object):
+
+class YoutubeUrl(unicode):
+
     @property
     def video_id(self):
         parsed_url = urlparse.urlparse(self)
@@ -12,22 +15,22 @@ class YoutubeUrl(object):
     @property
     def embed_url(self):
         return 'http://youtube.com/embed/%s/' % self.video_id
- 	
+
     def is_valid(self):
-    	con = urllib2.urlopen(self)
-        return True if con.code == 200 else False
+        try:
+            con = urllib2.urlopen(self)
+            return True if con.code == 200 else False
+        except:
+            return False
 
     @property
     def thumb(self):
         return "http://img.youtube.com/vi/%s/2.jpg" % self.video_id
-
-    def __len__(self):
-        return len(self.__unicode__())
 
 
 def to_python(value):
     if value in validators.EMPTY_VALUES:  # None or ''
         youtube_url = None
     elif value and isinstance(value, basestring):
-    	youtube_url = value
+        youtube_url = YoutubeUrl(value)
     return youtube_url

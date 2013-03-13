@@ -2,6 +2,7 @@ from django.forms.fields import CharField
 from django.utils.translation import ugettext_lazy as _ 
 from youtubeurl_field.validators import validate_youtube_url 
 from youtubeurl_field.youtubeurl import to_python, YoutubeUrl 
+from django.core.exceptions import ValidationError
 
 class YoutubeUrlField(CharField):
     default_error_messages = {

@@ -13,10 +13,6 @@ class YoutubeUrlField(models.URLField):
     def __init__(self, *args, **kwargs):
         super(YoutubeUrlField, self).__init__(*args, **kwargs)
         self.validators.append(validate_youtube_url)
- 
-    def to_python(self, value):
-        url = super(YoutubeUrlField, self).to_python(value)
-        return YoutubeUrl(url)
 
     def formfield(self, **kwargs):
         defaults = {
@@ -24,7 +20,11 @@ class YoutubeUrlField(models.URLField):
         }
         defaults.update(kwargs)
         return super(YoutubeUrlField, self).formfield(**defaults)
- 
+    
+    def to_python(self, value):
+        url = super(YoutubeUrlField, self).to_python(value)
+        return YoutubeUrl(url)
+
     def get_prep_value(self, value):
         return unicode(value)
  
