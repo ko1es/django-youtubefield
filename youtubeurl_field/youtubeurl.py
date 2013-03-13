@@ -1,5 +1,5 @@
 from django.core import validators
-import urllib
+import urllib2
 
 class YoutubeUrl(object):
     @property
@@ -12,7 +12,11 @@ class YoutubeUrl(object):
     @property
     def embed_url(self):
         return 'http://youtube.com/embed/%s/' % self.video_id
- 
+ 	
+    def is_valid(self):
+    	con = urllib2.urlopen(self)
+        return True if con.code == 200 else False
+
     @property
     def thumb(self):
         return "http://img.youtube.com/vi/%s/2.jpg" % self.video_id
