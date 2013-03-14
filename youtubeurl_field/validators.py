@@ -2,6 +2,7 @@
 import re
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
+from django import  forms
 
 def validate_youtube_url(value):
     '''El patron lo saque de http://stackoverflow.com/questions/2964678/jquery-youtube-url-validation-with-regex'''
