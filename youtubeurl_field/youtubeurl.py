@@ -1,5 +1,6 @@
 import urllib2
 import urlparse
+import os
 from django.core import validators
 
 
@@ -8,8 +9,8 @@ class YoutubeUrl(unicode):
     @property
     def video_id(self):
         parsed_url = urlparse.urlparse(self)
-        if parsed_url.query == '':
-            return parsed_url.path
+        if parsed_url.query == '' or '/v/' in parsed_url.path:
+            return os.path.split(parsed_url.path)[1]
         return urlparse.parse_qs(parsed_url.query)['v'][0]
  
     @property
