@@ -1,17 +1,21 @@
-from django.forms.fields import CharField
+from django.forms.fields import URLField, CharField, Field
 from django.utils.translation import ugettext_lazy as _ 
 from youtubeurl_field.validators import validate_youtube_url 
-from youtubeurl_field.youtubeurl import to_python, YoutubeUrl 
+from youtubeurl_field.youtubeurl import YoutubeUrl 
 from django.core.exceptions import ValidationError
+from django.core.validators import EMPTY_VALUES
+import urllib
+
 
 class YoutubeUrlField(CharField):
+
     default_error_messages = {
-        'invalid': _(u'Enter a valid url field.'),
+        'invalid': _('Enter a valid URL.'),
     }
-    default_validators = [validate_youtube_url]
+
+    def __init__(self, **kwargs):
+        super(YoutubeUrlField, self).__init__(**kwargs)
+        self.validators=[validate_youtube_url,]
 
     def to_python(self, value):
-        youtube_url = to_python(value)
-        if youtube_url and not youtube_url.is_valid():
-            raise ValidationError(self.error_messages['invalid'])
-        return youtube_url
+        return YoutubeUrl(value)
