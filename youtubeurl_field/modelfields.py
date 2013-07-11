@@ -15,7 +15,7 @@ class YoutubeUrlField(models.CharField):
 
     def __init__(self, *args, **kwargs):
         super(YoutubeUrlField, self).__init__(*args, **kwargs)
-        self.validators = (validate_youtube_url,)
+        self.validators.append(validate_youtube_url)
 
     def get_internal_type(self):
         return "CharField"
