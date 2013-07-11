@@ -21,7 +21,6 @@ class YoutubeUrlField(models.CharField):
         return "CharField"
 
     def to_python(self, value):
-        print 'to_python', repr(value)
         if isinstance(value, YoutubeUrl):
             return value
         return YoutubeUrl(value)
