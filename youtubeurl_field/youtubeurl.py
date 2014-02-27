@@ -18,6 +18,8 @@ class YoutubeUrl(object):
             parsed_url = urlparse.urlparse(self.value)
             if parsed_url.query == '' or '/v/' in parsed_url.path:
                 return os.path.split(parsed_url.path)[1]
+            if '/embed/' in parsed_url.path:
+                return os.path.split(parsed_url.path)[-1]
             return urlparse.parse_qs(parsed_url.query)['v'][0]
         return None
  
