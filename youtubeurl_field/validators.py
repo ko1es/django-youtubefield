@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import re
 import urllib2
 from django.utils.translation import ugettext_lazy as _
@@ -11,8 +11,8 @@ def validate_youtube_url(value):
     )
 
     if not value.is_empty():
-        #ignore embed params
-        if 'embed' and '?' in value.value:
+        # ignore embed params
+        if 'embed' in value.value and '?' in value.value:
             value.value = value.value[:value.value.rfind('?')]
         con = urllib2.urlopen(value.value)
         if con.code != 200:
