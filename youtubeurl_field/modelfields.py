@@ -26,7 +26,9 @@ class YoutubeUrlField(models.CharField):
         return YoutubeUrl(value)
 
     def get_prep_value(self, value):
-        return value.value
+        if isinstance(value, YoutubeUrl):
+            return value.value
+        return value
 
     def formfield(self, **kwargs):
         defaults = {
