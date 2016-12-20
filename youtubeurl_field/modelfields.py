@@ -11,7 +11,6 @@ from youtubeurl_field.youtubeurl import YoutubeUrl
 class YoutubeUrlField(models.CharField):
     """Youtube field."""
 
-    __metaclass__ = models.SubfieldBase
     description = _("YouTube url")
 
     def __init__(self, *args, **kwargs):
