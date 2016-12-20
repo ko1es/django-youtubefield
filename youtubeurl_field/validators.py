@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""Validators."""
 import re
 import urllib2
 from django.utils.translation import ugettext_lazy as _
@@ -6,8 +7,9 @@ from django import forms
 
 
 def validate_youtube_url(value):
+    """Validate url method."""
     pattern = (
-        r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})'
+        r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})'  # NOQA
     )
 
     if not value.is_empty():

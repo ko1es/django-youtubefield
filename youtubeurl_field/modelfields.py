@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-#-*- coding:utf-8 -*-
-
+# -*- coding: utf-8 -*-
+"""Model field."""
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -10,25 +9,32 @@ from youtubeurl_field.youtubeurl import YoutubeUrl
 
 
 class YoutubeUrlField(models.CharField):
+    """Youtube field."""
+
     __metaclass__ = models.SubfieldBase
     description = _("YouTube url")
 
     def __init__(self, *args, **kwargs):
+        """Initial method."""
         super(YoutubeUrlField, self).__init__(*args, **kwargs)
         self.validators.append(validate_youtube_url)
 
     def get_internal_type(self):
+        """Internal type method."""
         return "CharField"
 
     def to_python(self, value):
+        """To python method."""
         if isinstance(value, YoutubeUrl):
             return value
         return YoutubeUrl(value)
 
     def get_prep_value(self, value):
+        """Get prep value method."""
         return value.value
 
     def formfield(self, **kwargs):
+        """Form field method."""
         defaults = {
             'form_class': formfields.YoutubeUrlField,
         }
