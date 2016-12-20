@@ -32,7 +32,7 @@ class YoutubeUrlField(models.CharField):
         """Get prep value method."""
         value = super(YoutubeUrlField, self).get_prep_value(value)
         if isinstance(value, YoutubeUrl):
-            return value.value
+            return value
         return self.to_python(value)
 
     def formfield(self, **kwargs):
