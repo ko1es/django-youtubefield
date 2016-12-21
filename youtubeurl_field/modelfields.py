@@ -8,31 +8,18 @@ from youtubeurl_field.validators import validate_youtube_url
 from youtubeurl_field.youtubeurl import YoutubeUrl
 
 
-class YoutubeUrlField(models.CharField):
+class YoutubeUrlField(models.URLField):
     """Youtube field."""
 
-    description = _("YouTube url")
+    description = _("YouTubeUrl")
 
     def __init__(self, *args, **kwargs):
         """Initial method."""
         super(YoutubeUrlField, self).__init__(*args, **kwargs)
         self.validators.append(validate_youtube_url)
 
-    def get_internal_type(self):
-        """Internal type method."""
-        return "CharField"
-
     def to_python(self, value):
         """To python method."""
-        if isinstance(value, YoutubeUrl):
-            return value
-        return YoutubeUrl(value)
-
-    def get_prep_value(self, value):
-        """Get prep value method."""
-        value = super(YoutubeUrlField, self).get_prep_value(value)
-        if isinstance(value, YoutubeUrl):
-            return value
         return YoutubeUrl(value)
 
     def formfield(self, **kwargs):

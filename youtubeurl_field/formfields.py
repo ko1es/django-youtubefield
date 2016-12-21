@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """Form fields."""
-from django.forms.fields import CharField
+from django.forms.fields import URLField
 from django.utils.translation import ugettext_lazy as _
 from youtubeurl_field.validators import validate_youtube_url
 from youtubeurl_field.youtubeurl import YoutubeUrl
 
 
-class YoutubeUrlField(CharField):
+class YoutubeUrlField(URLField):
     """Youtube form field."""
 
     default_error_messages = {
@@ -20,4 +20,5 @@ class YoutubeUrlField(CharField):
 
     def to_python(self, value):
         """To python method."""
+        # value = super(YoutubeUrl, self).to_python(value)
         return YoutubeUrl(value)
